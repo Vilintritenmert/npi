@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/npi/src",
+  "monorepo": true,
+  "root": "apps/npi",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/npi/tsconfig.app.json"
+  },
+  "projects": {
+    "npi": {
+      "type": "application",
+      "root": "apps/npi",
+      "entryFile": "main",
+      "sourceRoot": "apps/npi/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/npi/tsconfig.app.json"
+      }
+    },
+    "npi-gateway": {
+      "type": "application",
+      "root": "apps/npi-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/npi-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/npi-gateway/tsconfig.app.json"
+      }
+    }
+  }
+}
