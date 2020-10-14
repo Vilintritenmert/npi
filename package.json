@@ -6,6 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "npi:import": "node dist/apps/npi/apps/npi/src/import.js",
+    "migration:generate": "./node_modules/typeorm/cli.js migration:generate -n tableActualization",
+    "migration:run": "./node_modules/typeorm/cli.js migration:run",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -23,10 +26,17 @@
   "dependencies": {
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
+    "@nestjs/microservices": "^7.4.4",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/typeorm": "^7.1.4",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
+    "pg": "^8.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.5.4"
+    "rxjs": "^6.5.4",
+    "typeorm": "^0.2.28"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.0.0",

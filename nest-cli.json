@@ -4,7 +4,7 @@
   "monorepo": true,
   "root": "apps/npi",
   "compilerOptions": {
-    "webpack": true,
+    "webpack": false,
     "tsConfigPath": "apps/npi/tsconfig.app.json"
   },
   "projects": {

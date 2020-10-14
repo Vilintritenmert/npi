@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  npi-gateway:
+    container_name: npi-gateway
+    build:
+      context: .
+      dockerfile: ./docker/nodejs/DockerFile
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules/:/usr/src/app/node_modules/
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    command: npm run start:dev npi-gateway
+    env_file:
+      - .env
+    networks:
+      - npi-webnet
+    depends_on:
+      - npi-microservice
+
+  npi-microservice:
+    container_name: npi-microservice
+    build:
+      context: .
+      dockerfile: ./docker/nodejs/DockerFile
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules/:/usr/src/app/node_modules/
+    command: npm run start:dev npi
+    env_file:
+      - .env
+    networks:
+      - npi-webnet
+    depends_on:
+      - npi_database
+
+  npi_database:
+    image: postgres
+    container_name: npi_database
+    restart: always
+    env_file: "./.env"
+    networks:
+      - npi-webnet
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DB}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_USER: ${DB_USER}
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - npi-pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  npi-pgdata:
+
+networks:
+  npi-webnet:
